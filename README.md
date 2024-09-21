@@ -12,14 +12,27 @@ Start a new virtual env
 poetry shel
 ```
 
-Install all dependencies (declared on pyproject.toml)
+Install all dependencies (declared on pyproject.toml) from all groups
 ```shell
 poetry install
+
+# only main group
+poetry install --only main
+
+# without test group
+poetry install --without test
 ```
 
 Add new dependency
 ```shell
+# add dep to main group
 poetry add requests
+
+# add dep to dev group
+poetry add black --group dev
+
+# add dep to test group
+poetry add pytest --group test
 ```
 
 ## Build and publish
