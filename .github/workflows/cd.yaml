@@ -19,4 +19,12 @@ jobs:
           pip install poetry
           poetry install
       - name: Build source & built distributions
-        run: poetry build
+        run: |
+          poetry version prerelease
+          poetry build
+      - name: configure test PyPI repository and publish
+        continue-on-error: true # cant publish to same version without forcing it
+        run: |
+          poetry config repositories.test-pypi https://test.pypi.org/legacy/
+          poetry config pypi-token.test-pypi ${{ secrets.TEST_PYPI_TOKEN }}
+          poetry publish -r test-pypi
