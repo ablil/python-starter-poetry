@@ -1,0 +1,30 @@
+name: Publish Python package
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup python 3.12
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+      - name: Build source & built distributions
+        run: |
+          poetry version prerelease
+          poetry build
+      - name: configure test PyPI repository and publish
+        continue-on-error: true # cant publish to same version without forcing it
+        run: |
+          poetry config repositories.test-pypi https://test.pypi.org/legacy/
+          poetry config pypi-token.test-pypi ${{ secrets.TEST_PYPI_TOKEN }}
+          poetry publish -r test-pypi
