@@ -72,4 +72,4 @@ jobs:
           python-version: '3.12'
       - run: pip install poetry
       - run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
-      - run: poetry publish -r pypi
+      - run: poetry publish
