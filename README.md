@@ -9,7 +9,7 @@ This is a ready to use starter for Python packages, clone it and make sure to up
 
 Start a new virtual env
 ```shell
-poetry shel
+poetry shell
 ```
 
 Install all dependencies (declared on pyproject.toml) from all groups
