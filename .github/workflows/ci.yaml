@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Test PyPI
-      url: https://test.pypi.org/project/ablil
+      url: https://test.pypi.org/project/ablil/${{ needs.build.outputs.release }}
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -85,11 +85,11 @@ jobs:
 
   publish-pypi:
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [publish-test-pypi]
+    needs: [publish-test-pypi, build]
     runs-on: ubuntu-latest
     environment:
       name: PyPI
-      url: https://pypi.org/project/ablil
+      url: https://pypi.org/project/ablil/${{ needs.build.outptus.release }}
     steps:
       - uses: actions/download-artifact@v4
         with:
