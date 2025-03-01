@@ -1,5 +1,7 @@
 # Python starter with Poetry
 
+[![CI](https://github.com/ablil/python-starter-poetry/actions/workflows/ci.yaml/badge.svg?event=push)](https://github.com/ablil/python-starter-poetry/actions/workflows/ci.yaml)
+
 This is a ready to use starter for Python packages, clone it and make sure to update:
 
 * pyproject.toml
