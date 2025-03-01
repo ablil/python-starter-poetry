@@ -30,13 +30,10 @@ jobs:
       release: ${{ steps.release.outputs.release }}
     steps:
       - uses: actions/checkout@v4
-      - name: setup python 3.12
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.12'
-          # cache: poetry
+      - name: setup python
+        uses: actions/setup-python@v5.4.0
       - name: Install dependencies
-        run: pip install poetry && poetry install
+        run: pipx install poetry && poetry install
 
       - name: Update pyproject.toml with current version
         run: VERSION=${{ needs.setup.outputs.release }} poetry version ${VERSION/v/}
@@ -76,9 +73,8 @@ jobs:
         with:
           name: artifact
           path: ${{ github.workspace }}
-      - uses: actions/setup-python@v3
-        with:
-          python-version: '3.12'
+      - name: setup python
+        uses: actions/setup-python@v5.4.0
       - run: pip install poetry
 
       - name: Publish release to test PyPI
@@ -99,9 +95,8 @@ jobs:
         with:
           name: artifact
           path: ${{ github.workspace }}
-      - uses: actions/setup-python@v3
-        with:
-          python-version: '3.12'
+      - name: setup python
+        uses: actions/setup-python@v5.4.0
       - run: pip install poetry
 
       - name: Publish release to PyPi
